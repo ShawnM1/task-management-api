@@ -32,6 +32,7 @@ export class TasksController {
 
     @Delete(':id')
     deleteTaskById(@Param('id') id: string): void {
+        const task = this.getTaskById(id);
         return this.tasksService.deleteTaskById(id);
     }
 

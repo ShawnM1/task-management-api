@@ -13,7 +13,7 @@ export class TasksService {
 
     createTask(createTaskDto: CreateTaskDto): Task {
         const { title, description } = createTaskDto;
-        
+
         const task: Task = {
             id: uuid(),
             title,
@@ -23,6 +23,10 @@ export class TasksService {
 
         this.tasks.push(task)
         return task;
+    }
+
+    getTaskById(id: string): Task {
+        return this.tasks.find(task => task.id === id);
     }
 
 }

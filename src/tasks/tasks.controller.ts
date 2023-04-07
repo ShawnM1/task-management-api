@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, Query } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { Task, TaskStatus } from './task.model';
 import { CreateTaskDto } from './dto/create-task.dto';
@@ -23,7 +23,11 @@ export class TasksController {
 
     @Get(':id')
     getTaskById(@Param('id') id: string): Task {
-        return this.tasksService.getTaskById(id);
+        const task = this.tasksService.getTaskById(id);
+        if (!task) {
+            throw new NotFoundException(`Task with ID: ${id} not found`)
+        } 
+        return task
     }
 
     @Delete(':id')
@@ -33,6 +37,8 @@ export class TasksController {
 
     @Patch(':id/status')
     updateTaskStatusById(@Param('id') id: string, @Body('status') status: TaskStatus): Task {
-        return this.tasksService.updateTaskStatusById(id, status)
+        const task = this.getTaskById(id)
+        task.status = status
+        return task
     }
 }

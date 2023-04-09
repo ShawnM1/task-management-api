@@ -14,4 +14,5 @@ export class Task {
 
     @Column()
     status: TaskStatus
+    
 }

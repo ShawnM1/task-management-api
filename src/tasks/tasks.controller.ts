@@ -33,11 +33,9 @@ export class TasksController {
         return this.tasksService.deleteTaskById(id);
     }
 
-    // @Patch(':id/status')
-    // updateTaskStatusById(@Param('id') id: string, @Body() updateTaskStatusDto: UpdateTaskStatusDto): Task {
-    //     const { status } = updateTaskStatusDto
-    //     const task = this.getTaskById(id)
-    //     task.status = status
-    //     return task
-    // }
+    @Patch(':id/status')
+    updateTaskStatusById(@Param('id') id: string, @Body() updateTaskStatusDto: UpdateTaskStatusDto): Promise<Task> {
+        const { status } = updateTaskStatusDto
+        return this.tasksService.updateTaskStatus(id, status)
+    }
 }

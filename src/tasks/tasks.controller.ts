@@ -28,11 +28,10 @@ export class TasksController {
         return this.tasksService.getTaskById(id);
     }
 
-    // @Delete(':id')
-    // deleteTaskById(@Param('id') id: string): void {
-    //     const task = this.getTaskById(id);
-    //     return this.tasksService.deleteTaskById(id);
-    // }
+    @Delete(':id')
+    deleteTaskById(@Param('id') id: string): Promise<void> {
+        return this.tasksService.deleteTaskById(id);
+    }
 
     // @Patch(':id/status')
     // updateTaskStatusById(@Param('id') id: string, @Body() updateTaskStatusDto: UpdateTaskStatusDto): Task {
